@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="Dashboard - Codeforces Round 902 (Div. 2, based on COMPFEST 15 - Final Round) - Codeforces A. Goals of Victory思路：求和，取负 AC code: 1234567891011121314151617181920212223242526272829303132#include&lt;bits&#x2F;">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://example.com/Codeforces%20Round%20902%20Div.%202.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="Dashboard - Codeforces Round 902 (Div. 2, based on COMPFEST 15 - Final Round) - Codeforces A. Goals of Victory思路：求和，取负 AC code: 1234567891011121314151617181920212223242526272829303132#include&lt;bits&#x2F;">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2023-10-09T10:43:09.932Z">
+<meta property="article:modified_time" content="2023-10-09T10:43:09.927Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="page-" class="h-entry article article-type-page" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/Codeforces%20Round%20902%20Div.%202.html" class="article-date">
+  <time class="dt-published" datetime="2023-10-09T10:43:09.932Z" itemprop="datePublished">2023-10-09</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p><a target="_blank" rel="noopener" href="https://codeforces.com/contest/1877">Dashboard - Codeforces Round 902 (Div. 2, based on COMPFEST 15 - Final Round) - Codeforces</a></p>
+<h2 id="A-Goals-of-Victory"><a href="#A-Goals-of-Victory" class="headerlink" title="A. Goals of Victory"></a>A. Goals of Victory</h2><p>思路：求和，取负</p>
+<p>AC code:</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> endl <span class="string">&#x27;\n&#x27;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> int long long</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> fast() ios::sync_with_stdio(false), cin.tie(nullptr), cout.tie(nullptr)</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="type">long</span> <span class="type">long</span> LL;</span><br><span class="line"><span class="keyword">typedef</span> pair&lt;<span class="type">char</span>, <span class="type">int</span>&gt; PCI;</span><br><span class="line"><span class="keyword">typedef</span> pair&lt;<span class="type">int</span>, <span class="type">int</span>&gt; PII;</span><br><span class="line"><span class="type">const</span> <span class="type">int</span> N = <span class="number">2e5</span>+<span class="number">10</span>, M = <span class="number">1001</span>;</span><br><span class="line"><span class="type">const</span> <span class="type">int</span> INF = <span class="number">0x3f3f3f3f</span>, mod = <span class="number">998244353</span>;</span><br><span class="line"><span class="type">int</span> T, n, m;</span><br><span class="line"><span class="type">int</span> a[N], b[N];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">gcd</span><span class="params">(<span class="type">int</span> a, <span class="type">int</span> b)</span></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(b) <span class="keyword">while</span>((a %= b) &amp;&amp; (b %= a));</span><br><span class="line">	<span class="keyword">return</span> a + b;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">signed</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="built_in">fast</span>();</span><br><span class="line">	T = <span class="number">1</span>;</span><br><span class="line">	cin &gt;&gt; T;</span><br><span class="line">	<span class="keyword">while</span>(T --)&#123;</span><br><span class="line">		<span class="type">int</span> sum = <span class="number">0</span>;</span><br><span class="line">		cin &gt;&gt; n;</span><br><span class="line">		<span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>; i &lt; n; i ++)</span><br><span class="line">		cin &gt;&gt; a[i], sum += a[i];</span><br><span class="line">		</span><br><span class="line">		cout &lt;&lt; -sum &lt;&lt; endl;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="B-Helmets-in-Night-Light"><a href="#B-Helmets-in-Night-Light" class="headerlink" title="B. Helmets in Night Light"></a>B. Helmets in Night Light</h2><p>题意：有n个村民，需要将通知由P传给每个村民，P传给一个人需要p成本，每个村民可以将情报以bi成本传给ai个人，若要传给所有n个人最小成本是多少</p>
+<p>思路：以成本为基准进行排序，优先传给情报小于p且最小的村民，由他向之后的村民进行传递，传递后的村民若传递成本小于p则继续传播，直到传播完所有村民或剩下的村民传播成本均大于p，剩下的村民全部由p成本进行传播，即可得到最小成本</p>
+<p>AC code:</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> endl <span class="string">&#x27;\n&#x27;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> int long long</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> fast() ios::sync_with_stdio(false), cin.tie(nullptr), cout.tie(nullptr)</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="type">long</span> <span class="type">long</span> LL;</span><br><span class="line"><span class="keyword">typedef</span> pair&lt;<span class="type">char</span>, <span class="type">int</span>&gt; PCI;</span><br><span class="line"><span class="keyword">typedef</span> pair&lt;<span class="type">int</span>, <span class="type">int</span>&gt; PII;</span><br><span class="line"><span class="type">const</span> <span class="type">int</span> N = <span class="number">2e5</span>+<span class="number">10</span>, M = <span class="number">1001</span>;</span><br><span class="line"><span class="type">const</span> <span class="type">int</span> INF = <span class="number">0x3f3f3f3f</span>, mod = <span class="number">998244353</span>;</span><br><span class="line"><span class="type">int</span> T, n, p, m;</span><br><span class="line"><span class="type">int</span> a[N], b[N];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">gcd</span><span class="params">(<span class="type">int</span> a, <span class="type">int</span> b)</span></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(b) <span class="keyword">while</span>((a %= b) &amp;&amp; (b %= a));</span><br><span class="line">	<span class="keyword">return</span> a + b;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">signed</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="built_in">fast</span>();</span><br><span class="line">	T = <span class="number">1</span>;</span><br><span class="line">	cin &gt;&gt; T;</span><br><span class="line">	<span class="keyword">while</span>(T --)&#123;</span><br><span class="line">			cin &gt;&gt; n &gt;&gt; m;</span><br><span class="line">			PII q[n + <span class="number">1</span>];</span><br><span class="line">			<span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt; n; i ++)</span><br><span class="line">			cin &gt;&gt; q[i].second;</span><br><span class="line">			<span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt; n; i ++)</span><br><span class="line">			cin &gt;&gt; q[i].first;</span><br><span class="line">			</span><br><span class="line">			<span class="built_in">sort</span>(q, q + n);<span class="comment">//以传播代价为基准进行排序</span></span><br><span class="line"></span><br><span class="line">			<span class="type">int</span> ans = m, cnt = <span class="number">1</span>;<span class="comment">//初始需要主动传播一个人</span></span><br><span class="line">			<span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt; n; i ++)&#123;</span><br><span class="line">				<span class="keyword">if</span>(q[i].first &gt;= m) <span class="keyword">break</span>;<span class="comment">//当该人的传播代价大于主动传播的代价</span></span><br><span class="line">				ans += q[i].first * <span class="built_in">min</span>(n - cnt, q[i].second);<span class="comment">//传播人数达标后不再溢出传播</span></span><br><span class="line">				cnt += q[i].second;</span><br><span class="line">				<span class="keyword">if</span>(cnt &gt;= n)&#123;</span><br><span class="line">				cnt = n;</span><br><span class="line">				<span class="keyword">break</span>;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span>(n - cnt)&#123;</span><br><span class="line">			ans += m * (n - cnt);<span class="comment">//剩下未传播的人主动传播</span></span><br><span class="line">		&#125;</span><br><span class="line">		cout &lt;&lt; ans &lt;&lt; endl;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="C-Joyboard"><a href="#C-Joyboard" class="headerlink" title="C. Joyboard"></a>C. Joyboard</h2><p>题意：要在n+1个插槽中填入n+1个非负整数，现在必须为第n+1个位置填入一个不大于m的非负整数，且序列满足ai &#x3D; ai+1 mod i，填入并分配完的序列中需要正好有k个不同的值，有多少满足条件的分配方式</p>
+<p>思路：可证k即不同的值最多为3个，因为无论m有多大，在第一次取余的过程中会变成不大于n的数，再对之后的数取余要么还是该数，要么遇到可以整除的数(1)变为0，所以k最多为3</p>
+<ul>
+<li>k &#x3D;&#x3D; 1时：填入的数只能为0，即只有一种情况</li>
+<li>k &#x3D;&#x3D; 2时 ：<ul>
+<li>若n &gt; m：则从1到m均可，第一次取余要么归0要么还是该数，一共m种情况</li>
+<li>若n &lt;&#x3D; m: 则1到m-1均可，以及能被n整除的数，一共(n - 1) + m &#x2F; n种情况</li>
+</ul>
+</li>
+<li>k &#x3D;&#x3D; 3时：<ul>
+<li>n &gt;m只会为2，不可能出现3</li>
+<li>n &lt;&#x3D; m时，一共有m种情况，用m减去出现2的情况即为出现3的情况，即m - ((n - 1) + m &#x2F; n)种情况</li>
+</ul>
+</li>
+<li>k &gt;&#x3D; 3时：不可能</li>
+</ul>
+<p>AC code:</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> endl <span class="string">&#x27;\n&#x27;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> int long long</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> fast() ios::sync_with_stdio(false), cin.tie(nullptr), cout.tie(nullptr)</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">typedef</span> <span class="type">long</span> <span class="type">long</span> LL;</span><br><span class="line"><span class="keyword">typedef</span> pair&lt;<span class="type">char</span>, <span class="type">int</span>&gt; PCI;</span><br><span class="line"><span class="keyword">typedef</span> pair&lt;<span class="type">int</span>, <span class="type">int</span>&gt; PII;</span><br><span class="line"><span class="type">const</span> <span class="type">int</span> N = <span class="number">2e5</span>+<span class="number">10</span>, M = <span class="number">1001</span>;</span><br><span class="line"><span class="type">const</span> <span class="type">int</span> INF = <span class="number">0x3f3f3f3f</span>, mod = <span class="number">998244353</span>;</span><br><span class="line"><span class="type">int</span> T, n, m, k;</span><br><span class="line"><span class="comment">//int a[N], b[N];</span></span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">gcd</span><span class="params">(<span class="type">int</span> a, <span class="type">int</span> b)</span></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(b) <span class="keyword">while</span>((a %= b) &amp;&amp; (b %= a));</span><br><span class="line">	<span class="keyword">return</span> a + b;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="type">signed</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="built_in">fast</span>();</span><br><span class="line">	T = <span class="number">1</span>;</span><br><span class="line">	cin &gt;&gt; T;</span><br><span class="line">	<span class="keyword">while</span>(T --)&#123;</span><br><span class="line">		cin &gt;&gt; n &gt;&gt; m &gt;&gt; k;</span><br><span class="line">		<span class="keyword">if</span>(k &gt; <span class="number">3</span>) cout &lt;&lt; <span class="number">0</span> &lt;&lt; endl;</span><br><span class="line">		<span class="keyword">else</span> <span class="keyword">if</span>(k == <span class="number">1</span>)</span><br><span class="line">		cout &lt;&lt; <span class="number">1</span> &lt;&lt; endl;</span><br><span class="line">		<span class="keyword">else</span> <span class="keyword">if</span>(k == <span class="number">2</span>)&#123;</span><br><span class="line">			<span class="keyword">if</span>(n &gt; m) cout &lt;&lt; m &lt;&lt; endl;</span><br><span class="line">			<span class="keyword">else</span>&#123;</span><br><span class="line">				cout &lt;&lt; n + m / n - <span class="number">1</span> &lt;&lt; endl;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span> <span class="keyword">if</span>(k == <span class="number">3</span>)&#123;</span><br><span class="line">			<span class="keyword">if</span>(n &gt;= m) cout &lt;&lt; <span class="number">0</span> &lt;&lt;endl;</span><br><span class="line">			<span class="keyword">else</span>&#123;</span><br><span class="line">				cout &lt;&lt; m - n - m / n + <span class="number">1</span> &lt;&lt; endl;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="D-Effects-of-Anti-Pimples"><a href="#D-Effects-of-Anti-Pimples" class="headerlink" title="D. Effects of Anti Pimples"></a>D. Effects of Anti Pimples</h2><p>题意：初始a数组的所有元素均为白色，可以任意选择元素染成黑色，之后其选择的所以黑色元素下标的倍数染成绿色，其得分即为所有黑色和绿色的元素的最大值，一共有pow(2, n) -1种选择方式，求所有可能的答案之和</p>
+<p>思路：每个位置的贡献次数为该位置下标-1的2的幂，而影响当前位置贡献单次多少的即为其下标倍数的元素，若之后的元素出现大于该位置的元素，该位置贡献即为较大元素。求幂需要用快速幂。</p>
+<p>AC code:</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> endl <span class="string">&#x27;\n&#x27;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> int long long</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> fast() ios::sync_with_stdio(false), cin.tie(nullptr), cout.tie(nullptr)</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="type">long</span> <span class="type">long</span> LL;</span><br><span class="line"><span class="keyword">typedef</span> pair&lt;<span class="type">char</span>, <span class="type">int</span>&gt; PCI;</span><br><span class="line"><span class="keyword">typedef</span> pair&lt;<span class="type">int</span>, <span class="type">int</span>&gt; PII;</span><br><span class="line"><span class="type">const</span> <span class="type">int</span> N = <span class="number">2e5</span>+<span class="number">10</span>, M = <span class="number">1001</span>;</span><br><span class="line"><span class="type">const</span> <span class="type">int</span> INF = <span class="number">0x3f3f3f3f</span>, mod = <span class="number">998244353</span>;</span><br><span class="line"><span class="type">int</span> T, n, m;</span><br><span class="line"><span class="type">int</span> a[N], b[N];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">gcd</span><span class="params">(<span class="type">int</span> a, <span class="type">int</span> b)</span></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(b) <span class="keyword">while</span>((a %= b) &amp;&amp; (b %= a));</span><br><span class="line">	<span class="keyword">return</span> a + b;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">qmi</span><span class="params">(<span class="type">int</span> a, <span class="type">int</span> k)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="type">int</span> res = <span class="number">1</span>;<span class="comment">//res为答案</span></span><br><span class="line">  <span class="keyword">while</span>(k)<span class="comment">//预处理，本质上为求k的二进制表示，把k次方拆成二进制的形式即若干个2的次幂的和</span></span><br><span class="line">  &#123;</span><br><span class="line">    <span class="keyword">if</span>(k &amp; <span class="number">1</span>)<span class="comment">//若当前K的末位为1</span></span><br><span class="line">    res = (LL)res * a % mod;<span class="comment">//a是不断反复平方的</span></span><br><span class="line">    k &gt;&gt;= <span class="number">1</span>;</span><br><span class="line">    a = (LL)a * a % mod;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">signed</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="built_in">fast</span>();</span><br><span class="line">	T = <span class="number">1</span>;</span><br><span class="line">	<span class="comment">//cin &gt;&gt; T;</span></span><br><span class="line">	<span class="keyword">while</span>(T --)&#123;</span><br><span class="line">		cin &gt;&gt; n;</span><br><span class="line">		<span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i ++)</span><br><span class="line">		cin &gt;&gt; a[i], b[i] = <span class="number">0</span>;</span><br><span class="line">		<span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i ++)&#123;</span><br><span class="line">			<span class="keyword">for</span>(<span class="type">int</span> j = i; j &lt;= n; j += i)&#123;</span><br><span class="line">				<span class="keyword">if</span>(a[j] &gt; b[i])</span><br><span class="line">				b[i] = a[j];<span class="comment">//找出每个数的max</span></span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="built_in">sort</span>(b + <span class="number">1</span>, b + n + <span class="number">1</span>);</span><br><span class="line">		<span class="type">int</span> ans = <span class="number">0</span>;</span><br><span class="line">		<span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i ++)&#123;</span><br><span class="line">			ans = (ans + (b[i] * <span class="built_in">qmi</span>(<span class="number">2</span>, i - <span class="number">1</span>)) % mod) % mod;<span class="comment">//每个数的最大值pow(2, i)即为该数的贡献</span></span><br><span class="line">		&#125; </span><br><span class="line">		cout &lt;&lt; ans % mod &lt;&lt; endl;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">                   _ooOoo_</span></span><br><span class="line"><span class="comment">                  o8888888o</span></span><br><span class="line"><span class="comment">                  88&quot; . &quot;88</span></span><br><span class="line"><span class="comment">                  (| ^_^ |)</span></span><br><span class="line"><span class="comment">                  O\  =  /O</span></span><br><span class="line"><span class="comment">               ____/`---&#x27;\____</span></span><br><span class="line"><span class="comment">             .&#x27;  \\|     |//  `.</span></span><br><span class="line"><span class="comment">            /  \\|||  :  |||//  \</span></span><br><span class="line"><span class="comment">           /  _||||| -:- |||||-  \</span></span><br><span class="line"><span class="comment">           |   | \\\  -  /// |   |</span></span><br><span class="line"><span class="comment">           | \_|  &#x27;&#x27;\---/&#x27;&#x27;  |   |</span></span><br><span class="line"><span class="comment">           \  .-\__  `-`  ___/-. /</span></span><br><span class="line"><span class="comment">         ___`. .&#x27;  /--.--\  `. . __</span></span><br><span class="line"><span class="comment">      .&quot;&quot; &#x27;&lt;  `.___\_&lt;|&gt;_/___.&#x27;  &gt;&#x27;&quot;&quot;.</span></span><br><span class="line"><span class="comment">     | | :  `- \`.;`\ _ /`;.`/ - ` : | |</span></span><br><span class="line"><span class="comment">     \  \ `-.   \_ __\ /__ _/   .-` /  /</span></span><br><span class="line"><span class="comment">======`-.____`-.___\_____/___.-`____.-&#x27;======</span></span><br><span class="line"><span class="comment">                   `=---=&#x27;</span></span><br><span class="line"><span class="comment">^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^</span></span><br><span class="line"><span class="comment">         佛祖保佑AC，永无bug缠身       </span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/Codeforces%20Round%20902%20Div.%202.html" data-id="cloba35rq0001qoj6brkhd9k3" data-title="" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/10/">October 2023</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2023/10/29/Hello-2/">Hello</a>
+          </li>
+        
+          <li>
+            <a href="/2023/10/28/Hello-1/">Hello</a>
+          </li>
+        
+          <li>
+            <a href="/2023/10/28/Hello/">Hello</a>
+          </li>
+        
+          <li>
+            <a href="/2023/10/28/hello-world/">Hello World</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2023 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
