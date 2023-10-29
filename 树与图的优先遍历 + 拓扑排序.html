@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="树与图的优先遍历 + 拓扑排序深度优先遍历(DFS)原理：对于一颗树，深搜由根节点一条路走到黑，再回溯到最近的未走过的节点，直到遍历完所有点。 题意：对于一棵树，n个结点，n-1条无向边，删除其中一个结点后剩余各联通块的最大值最小，找到该最小的最大联通块。 框架：vector模拟邻接表 12345678910&#x2F;&#x2F;深度遍历框架void dfs(int u)&amp;#123;	st[u] &#x3D; true;	f">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://example.com/%E6%A0%91%E4%B8%8E%E5%9B%BE%E7%9A%84%E4%BC%98%E5%85%88%E9%81%8D%E5%8E%86%20+%20%E6%8B%93%E6%89%91%E6%8E%92%E5%BA%8F.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="树与图的优先遍历 + 拓扑排序深度优先遍历(DFS)原理：对于一颗树，深搜由根节点一条路走到黑，再回溯到最近的未走过的节点，直到遍历完所有点。 题意：对于一棵树，n个结点，n-1条无向边，删除其中一个结点后剩余各联通块的最大值最小，找到该最小的最大联通块。 框架：vector模拟邻接表 12345678910&#x2F;&#x2F;深度遍历框架void dfs(int u)&amp;#123;	st[u] &#x3D; true;	f">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2023-09-01T16:40:50.120Z">
+<meta property="article:modified_time" content="2023-09-01T16:40:50.120Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="page-" class="h-entry article article-type-page" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/%E6%A0%91%E4%B8%8E%E5%9B%BE%E7%9A%84%E4%BC%98%E5%85%88%E9%81%8D%E5%8E%86%20+%20%E6%8B%93%E6%89%91%E6%8E%92%E5%BA%8F.html" class="article-date">
+  <time class="dt-published" datetime="2023-09-01T16:40:50.120Z" itemprop="datePublished">2023-09-02</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="树与图的优先遍历-拓扑排序"><a href="#树与图的优先遍历-拓扑排序" class="headerlink" title="树与图的优先遍历 + 拓扑排序"></a>树与图的优先遍历 + 拓扑排序</h2><h3 id="深度优先遍历-DFS"><a href="#深度优先遍历-DFS" class="headerlink" title="深度优先遍历(DFS)"></a>深度优先遍历(DFS)</h3><p>原理：对于一颗树，深搜由根节点一条路走到黑，再回溯到最近的未走过的节点，直到遍历完所有点。</p>
+<p>题意：对于一棵树，n个结点，n-1条无向边，删除其中一个结点后剩余各联通块的最大值最小，找到该最小的最大联通块。</p>
+<p>框架：vector模拟邻接表</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//深度遍历框架</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">dfs</span><span class="params">(<span class="type">int</span> u)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	st[u] = <span class="literal">true</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">auto</span> j : q[u])</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span>(!st[j])</span><br><span class="line">		<span class="built_in">dfs</span>(j);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>code详解：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> N = <span class="number">2e5</span>+<span class="number">10</span>;</span><br><span class="line"><span class="type">int</span> n, m;</span><br><span class="line"><span class="type">bool</span> st[N];</span><br><span class="line"><span class="type">int</span> ans = N;<span class="comment">//全局答案，寻找最小的最大值</span></span><br><span class="line">vector&lt;<span class="type">int</span>&gt; q[N];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">dfs</span><span class="params">(<span class="type">int</span> u)</span><span class="comment">//返回以u为根的子树的大小</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	st[u] = <span class="literal">true</span>;<span class="comment">//标记当前点已经被搜过</span></span><br><span class="line">	</span><br><span class="line">	<span class="type">int</span> sum = <span class="number">1</span>, res = <span class="number">0</span>;<span class="comment">//记录当前子树大小和删掉该点后每一个联通块的最大值</span></span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">auto</span> j : q[u])<span class="comment">//遍历当前节点所连接的子节点</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span>(!st[j])</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="type">int</span> s = <span class="built_in">dfs</span>(j);</span><br><span class="line">			res = <span class="built_in">max</span>(res, s);</span><br><span class="line">			sum += s;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	res = <span class="built_in">max</span>(n - sum, res);<span class="comment">//子树上方整体的联通块和下方最大的联通块进行比较，找到最大连通块</span></span><br><span class="line">	</span><br><span class="line">	ans = <span class="built_in">min</span>(ans, res);<span class="comment">//取最小的最大值</span></span><br><span class="line">	<span class="keyword">return</span> sum;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	cin &gt;&gt; n;</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt; n - <span class="number">1</span>; i ++)</span><br><span class="line">	&#123;</span><br><span class="line">		 <span class="type">int</span> a, b; cin &gt;&gt; a &gt;&gt; b;</span><br><span class="line">		 q[a].<span class="built_in">push_back</span>(b);</span><br><span class="line">		 q[b].<span class="built_in">push_back</span>(a);</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="built_in">dfs</span>(<span class="number">1</span>);</span><br><span class="line">	</span><br><span class="line">	cout &lt;&lt; ans &lt;&lt; endl;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="广度优先遍历-BFS"><a href="#广度优先遍历-BFS" class="headerlink" title="广度优先遍历(BFS)"></a>广度优先遍历(BFS)</h3><p>原理：从起点开始向外拓展一层结点，当第一次拓展到某一点，即为起点到该点的最短路</p>
+<p>题意：对于一个n点m边的有向图，可能存在重边和自环，求出1到n点的最短距离，若无法到n点则输出-1.</p>
+<p>框架：队列实现，存入起点，向外拓展当前队头所能拓展的邻点，若拓展点未被遍历过则存入队列并弹出队头，</p>
+<p>注意更新距离数组的距离，只有第一次搜到目标点的距离才为最短距离</p>
+<p>code详解：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="type">long</span> <span class="type">long</span> LL;</span><br><span class="line"><span class="type">const</span> <span class="type">int</span> N = <span class="number">2e5</span>+<span class="number">10</span>;</span><br><span class="line"><span class="type">int</span> n, m, d[N];<span class="comment">//距离数组，存当前点的最短路经</span></span><br><span class="line">queue&lt;<span class="type">int</span>&gt; q;</span><br><span class="line">vector&lt;<span class="type">int</span>&gt; g[N];<span class="comment">//存图，模拟邻接表</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">bfs</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">memset</span>(d, <span class="number">-1</span>, <span class="keyword">sizeof</span> d);<span class="comment">//初始化为-1，到不了就直接输出</span></span><br><span class="line"></span><br><span class="line">	d[<span class="number">1</span>] = <span class="number">0</span>;<span class="comment">//初始点距离为1</span></span><br><span class="line">	</span><br><span class="line">	q.<span class="built_in">push</span>(<span class="number">1</span>);</span><br><span class="line">	<span class="keyword">while</span>(!q.<span class="built_in">empty</span>())</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="type">int</span> t = q.<span class="built_in">front</span>();</span><br><span class="line">		q.<span class="built_in">pop</span>();</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">auto</span> j : g[t])<span class="comment">//遍历当前节点子节点</span></span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span>(d[j] == <span class="number">-1</span>)</span><br><span class="line">			&#123;</span><br><span class="line">				d[j] = d[t] + <span class="number">1</span>;</span><br><span class="line">				q.<span class="built_in">push</span>(j);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> d[n];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	cin &gt;&gt; n &gt;&gt; m;</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt; m; i ++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="type">int</span> a, b; cin &gt;&gt; a &gt;&gt; b;</span><br><span class="line">		g[a].<span class="built_in">push_back</span>(b);</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	cout &lt;&lt; <span class="built_in">bfs</span>() &lt;&lt; endl;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="拓扑排序"><a href="#拓扑排序" class="headerlink" title="拓扑排序"></a>拓扑排序</h3><p>定义：对于一个有向图中的每条边起点均在终点之前，所有边均为从前指向后的有向无环图被称为拓扑图，环不可能是拓扑序列。入度，有多少边指向该点；出度，有多少边从该点出去。</p>
+<p>题意：给出合法有向图，输出任一拓扑序列</p>
+<p>框架：</p>
+<p>1.把所有入度为0的点入队，入度为0即没有任何边指向该点，即没有点在其前面，则所有入度为0的点都可以排在当前最前面的位置</p>
+<p>2.宽搜，枚举t的所有出边，即t指向的边，删掉t并存入答案数组，t所指向的点的入度减一，若指向点的入度减为0，则该点无限制可放入队列</p>
+<p>3.比较答案数组与n的数量，若不相同说明存在环，环的入度不会为0</p>
+<p>一个有向无环图一定至少存在一个入度为0的点，且图的拓扑序列不唯一</p>
+<p>code详解：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> N = <span class="number">2e5</span>+<span class="number">10</span>;</span><br><span class="line">vector&lt;<span class="type">int</span>&gt; g[N];<span class="comment">//vector模拟邻接表存图</span></span><br><span class="line">queue&lt;<span class="type">int</span>&gt; q;<span class="comment">//宽搜队列</span></span><br><span class="line"><span class="type">int</span> n, m;</span><br><span class="line"><span class="type">int</span> d[N];<span class="comment">//入度数组</span></span><br><span class="line"><span class="type">int</span> ans[N], cnt = <span class="number">0</span>;<span class="comment">//STL需多开一个答案数组</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">bool</span> <span class="title">topsort</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i ++)</span><br><span class="line">	<span class="keyword">if</span>(!d[i]) q.<span class="built_in">push</span>(i);<span class="comment">//压入初始入度为0的点</span></span><br><span class="line">	</span><br><span class="line">	<span class="keyword">while</span>(!q.<span class="built_in">empty</span>())</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="type">int</span> t = q.<span class="built_in">front</span>();</span><br><span class="line">		q.<span class="built_in">pop</span>();</span><br><span class="line">		ans[cnt ++] = t;<span class="comment">//每次取出入度为0的点进答案数组</span></span><br><span class="line">		</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">auto</span> j : g[t])<span class="comment">//遍历该点出度指向的点，该点删去后指向的点入度--</span></span><br><span class="line">		&#123;</span><br><span class="line">			d[j] --;</span><br><span class="line">			<span class="keyword">if</span>(d[j] == <span class="number">0</span>) q.<span class="built_in">push</span>(j);<span class="comment">//入度为0时压入</span></span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> cnt == n;<span class="comment">//最终入度为0的点的数量为n时说明为拓扑序列</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	cin &gt;&gt; n &gt;&gt; m;</span><br><span class="line">	</span><br><span class="line">	<span class="built_in">memset</span>(d, <span class="number">0</span>, <span class="keyword">sizeof</span> d);</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt; m; i ++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="type">int</span> a, b; cin &gt;&gt; a &gt;&gt; b;</span><br><span class="line">		g[a].<span class="built_in">push_back</span>(b);<span class="comment">//a指向b</span></span><br><span class="line">		d[b] ++;<span class="comment">//记录b的入度</span></span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">if</span>(<span class="built_in">topsort</span>())</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt; cnt; i ++)<span class="comment">//顺序输出答案数组，即进入的顺序</span></span><br><span class="line">		cout &lt;&lt; ans[i] &lt;&lt; <span class="string">&quot; &quot;</span>;</span><br><span class="line">		cout &lt;&lt; endl;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">	cout &lt;&lt; <span class="string">&quot;-1&quot;</span> &lt;&lt; endl;<span class="comment">//有环，无法形成拓扑序列，输出-1</span></span><br><span class="line">	</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/%E6%A0%91%E4%B8%8E%E5%9B%BE%E7%9A%84%E4%BC%98%E5%85%88%E9%81%8D%E5%8E%86%20+%20%E6%8B%93%E6%89%91%E6%8E%92%E5%BA%8F.html" data-id="cloa2t2hi0000dwj6af0y9beh" data-title="" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/10/">October 2023</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2023/10/29/Hello-2/">Hello</a>
+          </li>
+        
+          <li>
+            <a href="/2023/10/28/Hello-1/">Hello</a>
+          </li>
+        
+          <li>
+            <a href="/2023/10/28/Hello/">Hello</a>
+          </li>
+        
+          <li>
+            <a href="/2023/10/28/hello-world/">Hello World</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2023 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
